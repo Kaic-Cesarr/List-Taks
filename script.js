@@ -13,7 +13,25 @@ function adicionarTarefas() {
 
         tarefas.push(novaTarefa)
         inputElement.value = '';
+        
+        renderTarefas();
     }
+}
+
+
+function renderTarefas() {
+    listElement.innerHTML = "";
+
+
+    // Percorrer o array
+    tarefas.map((tarefa) => { 
+        let liElement = document.createElement("li");
+        let tarefaText = document.createTextNode(tarefa);
+
+        listElement.appendChild(liElement);
+        liElement.appendChild(tarefaText);
+        
+    })
 }
 
 
