@@ -22,17 +22,31 @@ function adicionarTarefas() {
 function renderTarefas() {
     listElement.innerHTML = "";
 
-
     // Percorrer o array
     tarefas.map((tarefa) => { 
         let liElement = document.createElement("li");
         let tarefaText = document.createTextNode(tarefa);
 
-        listElement.appendChild(liElement);
-        liElement.appendChild(tarefaText);
+        let linkElement = document.createElement("a");
+        linkElement.setAttribute("href", "#");
         
+        let linkText = document.createTextNode("Deletar");
+        linkElement.appendChild(linkText);
+
+        let posicao = tarefas.indexOf(tarefa);
+
+        linkElement.setAttribute("onclick", `deletarTarefa(${posicao})`)
+
+        liElement.appendChild(tarefaText);
+        listElement.appendChild(liElement);
+        liElement.appendChild(linkElement);
+
     })
 }
 
-
 buttonElement.onclick = adicionarTarefas;
+
+function deletarTarefa(posicao) {
+    tarefas.splice(posicao, 1);
+    renderTarefas();
+}
